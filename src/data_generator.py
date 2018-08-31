@@ -36,12 +36,16 @@ class DataGenerator(Sequence):
 
     def __data_generation(self, sentences_indexed_temp):
         'Generates data containing batch_size samples'
-        X = np.zeros((self.batch_size, self.seq_len-1), dtype=np.int)
+        # Initialization
+        X = np.zeros((self.batch_size, self.seq_len - 1, self.n_words), dtype=np.bool)
         y = np.zeros((self.batch_size, self.n_words), dtype=np.bool)
 
         # Generate data
-        for i, sentence_idx in enumerate(sentences_indexed_temp):
-            X[i,] = sentence_idx[:-1]
-            y[i, sentence_idx[-1]] = 1
+        for i, sentence in enumerate(sentences_indexed_temp):
+            # Generate X
+            for t, w in enumerate(sentence[:-1]):
+                X[i, t, w] = 1
+
+            y[i, sentence[-1]] = 1
 
         return X, y
