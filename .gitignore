@@ -69,6 +69,7 @@ models/
 data/
 examples/
 checkpoints/
+log/
 src/__pycache__/utils\.cpython-35\.pyc
 
 src/__pycache__/data_generator\.cpython-35\.pyc
